@@ -1195,7 +1195,8 @@ class grade_report_grader extends grade_report {
                         }
 
                         $itemcell->text .= "<span class='gradevalue{$hidden}{$gradepass}'>" .
-                                grade_format_gradevalue($gradeval, $item, true, $gradedisplaytype, null) . "</span>";
+                                grade_format_gradevalue($gradeval, $item, $userid, true, $gradedisplaytype, null) . "</span>"
+                            . grade_format_gradevalue_status($item, $userid);
                         if ($showanalysisicon) {
                             $itemcell->text .= $this->gtree->get_grade_analysis_icon($grade);
                         }
@@ -1605,7 +1606,7 @@ class grade_report_grader extends grade_report {
                 } else {
                     $sum = $sumarray[$item->id];
                     $avgradeval = $sum/$meancount;
-                    $gradehtml = grade_format_gradevalue($avgradeval, $item, true, $displaytype, $decimalpoints);
+                    $gradehtml = grade_format_gradevalue($avgradeval, $item, null, true, $displaytype, $decimalpoints);
 
                     $numberofgrades = '';
                     if ($shownumberofgrades) {
